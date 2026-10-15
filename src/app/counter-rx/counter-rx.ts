@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, interval, map } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   imports: [AsyncPipe],
@@ -10,6 +11,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CounterRx {
   count$ = new BehaviorSubject<number>(0); // the $ suffix is the convention for streams
+  double$ = this.count$.pipe(map((c) => c * 2));
+
+  constructor() {
+    interval(1000)
+      .pipe(takeUntilDestroyed())
+      .subscribe((n) => console.log('tick' + n));
+  }
 
   increment(): void {
     this.count$.next(this.count$.value + 1);

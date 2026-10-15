@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 10rem;
+}
+button {
+  font-size: 1.25rem;
+  margin: 0 4px;
+  padding: 4px 14px;
+}
+.done {
+  text-decoration: line-through;
+}

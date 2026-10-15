@@ -1,2 +1,6 @@
 <app-counter />
-<app-counter-rx />
+<button (click)="show.set(!show())">Toggle</button>
+@if (show()) {
+  <app-counter-rx />
+  <app-todo-list />
+}

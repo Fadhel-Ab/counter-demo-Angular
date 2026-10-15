@@ -1,0 +1,16 @@
+<input #titleInput type="text" placeholder="Enter Todo item" />
+
+<button (click)="store.add(titleInput.value); titleInput.value = ''">add</button>
+<p>{{ store.remaining$ | async }} left</p>
+<ul>
+  @for (todo of (store.todos$ | async) ?? []; track todo.id) {
+    <li [class.done]="todo.done">
+      <input type="checkbox" [checked]="todo.done" (change)="store.toggle(todo.id)" />{{
+        todo.title
+      }}
+      <button (click)="store.remove(todo.id)">Remove</button>
+    </li>
+  } @empty {
+    <li>Nothing to do 🎉</li>
+  }
+</ul>
