@@ -20,6 +20,8 @@ export class Todo {
   remaining = computed(() => this._todos().filter((t) => !t.done).length);
   private nextId = 0;
 
+  // for filters
+
   add(title: string) {
     const currentList = this._todos();
     // const maxId = currentList.length > 0 ? Math.max(...currentList.map((t) => t.id)) : 0; this also works w

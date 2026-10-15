@@ -5,10 +5,11 @@
 <ul>
   @for (todo of store.todos(); track todo.id) {
     <li [class.done]="todo.done">
-      <input type="checkbox" [checked]="todo.done" (change)="store.toggle(todo.id)" />{{
-        todo.title
-      }}
-      <button (click)="store.remove(todo.id)">Remove</button>
+      <app-todo-row
+        [todo]="todo"
+        (toggled)="store.toggle($event)"
+        (removed)="store.remove($event)"
+      />
     </li>
   } @empty {
     <li>Nothing to do 🎉</li>
