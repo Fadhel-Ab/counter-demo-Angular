@@ -1,8 +1,10 @@
 :host {
   display: block;
   text-align: center;
+  justify-content: center;
   font-family: sans-serif;
   margin-top: 5rem;
+  align-items: center;
 }
 button {
   font-size: 1.25rem;

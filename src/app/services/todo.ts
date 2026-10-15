@@ -21,6 +21,27 @@ export class Todo {
   private nextId = 0;
 
   // for filters
+  filters = signal<'all' | 'active' | 'done'>('all');
+  /* visible = computed(() => {
+    const todos = this._todos();
+    const currentFilter = this.filters();
+
+    if (currentFilter === 'active') return todos.filter((t) => t.done===false);
+    if (currentFilter === 'done') return todos.filter((t) => t.done===true);
+    return todos;
+  }); */
+
+  visible = computed(() => {
+    const todos = this._todos();
+    const currentFilter = this.filters();
+
+    const filterMap = {
+      active: () => todos.filter((t) => t.done === false),
+      done: () => todos.filter((t) => t.done === true),
+      all: () => todos,
+    };
+    return filterMap[currentFilter]();
+  });
 
   add(title: string) {
     const currentList = this._todos();
@@ -41,5 +62,9 @@ export class Todo {
   }
   remove(id: number) {
     this._todos.update((list) => list.filter((i) => i.id !== id)); // filter returns new array
+  }
+
+  setFilter(value: 'all' | 'active' | 'done') {
+    this.filters.set(value);
   }
 }
